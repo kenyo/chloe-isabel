@@ -1,0 +1,11 @@
+{
+  "name": "chloe-isabel",
+  "version": "0.0.0",
+  "description": "take home coding challenge for chloe + isabela",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "author": "kenyo",
+  "license": "ISC"
+}
