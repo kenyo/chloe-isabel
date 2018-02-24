@@ -4,8 +4,26 @@
   "description": "take home coding challenge for chloe + isabela",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "build": "webpack",
+    "start": "node ./index.js"
   },
   "author": "kenyo",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "antd": "^3.2.1",
+    "express": "^4.16.2",
+    "graphql": "^0.13.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-import": "^1.6.5",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.10",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "style-loader": "^0.20.2",
+    "webpack": "^3.11.0"
+  }
 }
