@@ -1,52 +1,49 @@
 import React from 'react'
 import {render} from 'react-dom'
 import { List, Card } from 'antd'
+import ApolloClient from 'apollo-client-preset'
+import { HttpLink } from 'apollo-link-http'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import gql from 'graphql-tag'
+import Ant from './Ant.jsx'
 
-const data = [
-  {
-    title: 'Title 1',
-  },
-  {
-    title: 'Title 2',
-  },
-  {
-    title: 'Title 3',
-  },
-  {
-    title: 'Title 4',
-  },
-  {
-    title: 'Title 5',
-  },
-  {
-    title: 'Title 6',
-  },
-]
+const client = new ApolloClient({
+  link: new HttpLink({ uri: 'https://antserver-blocjgjbpw.now.sh/graphql' }),
+  cache: new InMemoryCache(),
+})
 
-const TodoList = (props) => (
-  <div>
-		<List
-			grid={{ gutter: 16, xs: 1, sm: 2, md: 4, lg: 4, xl: 6 }}
-    	dataSource={data}
-    	renderItem={item => (
-				<List.Item>
-					<Card title={item.title}>Card content</Card>
-				</List.Item>
-			)}
-		/>
-  </div>
-)
+const query = gql`{
+  ants {
+    name
+    length
+    color
+    weight
+  }
+}
+`
 
 // container (root) component
 class App extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      ants: [],
+    }
+  }
+
+  componentWillMount() {
+    client.query({query})
+      .then(({data}) => this.setState({ants: data.ants}))
+  }
+
   render () {
     return (
       <div>
-        <TodoList />
+
       </div>
     );
   }
 }
 
 render(<App/>, document.getElementById('app'));
-
