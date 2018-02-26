@@ -12,4 +12,4 @@ app.use(express.static(PUBLIC_DIR_PATH))
 
 app.get('*', (req, res) => res.sendFile(mainHtml))
 
-app.listen(3000, () => console.log('ant race app started on port 3000'))
+app.listen(process.env.PORT || 3000, () => console.log('ant race app started on port 3000'))
