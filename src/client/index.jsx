@@ -57,7 +57,9 @@ class App extends React.Component {
       this.setState({loading: true})
       return Promise.all(this.state.ants.map(wrappedFunction))
         .then(x => {
-          let antsState = this.state.ants.map((y, i) => Object.assign({}, y, {odds: x[i]}))
+          let antsState = this.state.ants
+            .map((y, i) => Object.assign({}, y, {odds: x[i]}))
+            .sort((x, y) => y.odds - x.odds)
           // update ants state with odds data and turning loading spinner off
           this.setState({
             ants: antsState,
@@ -74,6 +76,7 @@ class App extends React.Component {
 
   render() {
     const antCards = this.state.ants.map((x, i) => <Ant stats={x} key={i}/>)
+
     return (
       <div>
         <h2>a day at the ant races</h2>
