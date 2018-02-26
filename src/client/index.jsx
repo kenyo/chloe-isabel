@@ -36,6 +36,7 @@ function wrappedFunction() {
       }, delay);
     };
   }
+
 }
 
 // container (root) component
@@ -51,24 +52,19 @@ class App extends React.Component {
   }
 
   generateOdds(ants) {
-    let antsArray  = this.state.ants || []
     return () => {
-      return Promise.all(antsArray.map(wrappedFunction))
+      // turn loading spinner on
+      this.setState({loading: true})
+      return Promise.all(this.state.ants.map(wrappedFunction))
         .then(x => {
-          console.log(x)
-          return x
+          let antsState = this.state.ants.map((y, i) => Object.assign({}, y, {odds: x[i]}))
+          // update ants state with odds data and turning loading spinner off
+          this.setState({
+            ants: antsState,
+            loading: false,
+          })
         })
-
     }
-
-    // return () => {
-    //   const antsWithodds = oddsContainer.map((x, i) => {
-    //     return generateAntWinLikelihoodCalculator()(odds =>
-    //       Object.assign({}, this.state.ants[i], {odds})
-    //     )
-    //   })
-    //   this.setState({ants: antsWithodds})
-    // }
   }
 
   componentWillMount() {
