@@ -2,6 +2,9 @@
   "name": "chloe-isabel",
   "version": "0.0.0",
   "description": "take home coding challenge for chloe + isabela",
+  "engines": {
+    "node": "8.2.1"
+  },
   "main": "index.js",
   "scripts": {
     "build": "webpack",
